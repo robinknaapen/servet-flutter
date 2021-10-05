@@ -1,0 +1,38 @@
+name: servet
+description: A new Flutter project.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  http: ^0.13.3
+  intl: ^0.17.0
+  json_annotation: ^4.1.0
+  provider: ^5.0.0
+  hive: ^2.0.4
+  hive_flutter: ^1.1.0
+  flutter_secure_storage: ^4.2.1
+  qlevar_router: ^1.5.1
+  flutter_svg: ^0.22.0
+  qr_code_scanner: ^1.0.0-alpha.1
+  biometric_storage: ^3.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.0
+  json_serializable: ^5.0.1
+  hive_generator: ^1.1.1
+  build_runner: ^2.1.2
+
+flutter:
+  generate: true
+  uses-material-design: true
+  assets:
+    - ./assets/images/
