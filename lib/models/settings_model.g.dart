@@ -17,7 +17,7 @@ class SettingsModelAdapter extends TypeAdapter<SettingsModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return SettingsModel(
-      host: fields[0] as Uri?,
+      host: fields[0] as Uri,
       token: fields[1] as String?,
     );
   }

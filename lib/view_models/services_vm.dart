@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:servet/models/service_model.dart';
-import 'package:servet/services/service_api.dart';
+import 'package:servet/services/http/service_api.dart';
 
 class ServiceListVM with ChangeNotifier {
   List<ServiceViewModel> services = List.empty();

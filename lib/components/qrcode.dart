@@ -1,13 +1,11 @@
 import 'dart:convert';
-import "dart:io";
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 import 'package:servet/models/settings_model.dart';
 import 'package:servet/models/token_response.dart';
-import 'package:servet/services/token_api.dart';
+import 'package:servet/services/http/token_api.dart';
 import 'package:servet/view_models/settings_vm.dart';
 
 class QRCodeComponent extends StatefulWidget {
@@ -55,7 +53,7 @@ class _QRCodeComponentState extends State<QRCodeComponent> {
         TokenResponse apiToken = await tokenAPI.issue();
 
         await widget.settingsVM
-            .save(SettingsModel(host: apiToken.url, token: apiToken.token));
+            .put(SettingsModel(host: apiToken.url, token: apiToken.token));
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

@@ -16,7 +16,7 @@ class _SettingsViewState extends State<SettingsView> {
   void initState() {
     super.initState();
 
-    Provider.of<SettingsVM>(context, listen: false).get();
+    Provider.of<SettingsVM>(context, listen: false).fetch();
   }
 
   @override
@@ -46,50 +46,27 @@ class _SettingsViewState extends State<SettingsView> {
   }
 
   Widget _buildUI(SettingsVM settingsVM) {
-    if (settingsVM.settings == null) {
-      return const Expanded(child: Center(child: CircularProgressIndicator()));
-    }
-
     return Container(
       padding: const EdgeInsets.all(8.0),
       alignment: Alignment.topLeft,
-      child: _form(),
+      child: _list(),
     );
   }
 
-  Widget _form() {
+  Widget _list() {
     return Consumer<SettingsVM>(
       builder: (context, settingsVM, child) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Wrap(
-            runSpacing: 16,
-            children: [
-              TextFormField(
-                controller: TextEditingController(
-                  text: settingsVM.settings?.host?.toString(),
-                ),
-                enabled: false,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.dns),
-                  labelText: "Server URL",
-                  border: OutlineInputBorder(),
-                ),
+        return ListView.builder(
+          itemCount: settingsVM.settings.length,
+          itemBuilder: (context, index) {
+            var settings = settingsVM.settings[index];
+
+            return Card(
+              child: ListTile(
+                title: Text(settings.host.toString()),
               ),
-              TextFormField(
-                controller: TextEditingController(
-                  text: settingsVM.settings?.token,
-                ),
-                obscureText: true,
-                enabled: false,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.vpn_key),
-                  labelText: "Token",
-                  border: OutlineInputBorder(),
-                ),
-              ),
-            ],
-          ),
+            );
+          },
         );
       },
     );

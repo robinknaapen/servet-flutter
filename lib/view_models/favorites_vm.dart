@@ -1,26 +1,29 @@
 import 'package:flutter/widgets.dart';
 import 'package:servet/models/favorite_model.dart';
-import 'package:servet/services/favorites_api.dart';
+import 'package:servet/services/hive/favorites_api.dart';
 
 class FavoritesVM with ChangeNotifier {
-  List<FavoritesViewModel>? favorites;
+  List<FavoritesViewModel> favorites = List.empty();
 
-  Future<void> fetch() async {
-    favorites =
-        (await FavoritesAPI().get()).map((e) => FavoritesViewModel(e)).toList();
-    favorites?.sort((a, b) => a.id.compareTo(b.id));
+  fetch(int hashCode) {
+    favorites = FavoritesAPI()
+        .get(hashCode)
+        .values
+        .map((e) => FavoritesViewModel(e))
+        .toList();
 
+    favorites.sort((a, b) => a.id.compareTo(b.id));
     notifyListeners();
   }
 
-  Future<void> add(FavoriteModel f) async {
-    await FavoritesAPI().put(f);
-    return fetch();
+  Future<void> add(int hashCode, FavoriteModel f) async {
+    await FavoritesAPI().put(hashCode, f);
+    fetch(hashCode);
   }
 
-  Future<void> delete(int id) async {
-    await FavoritesAPI().delete(id);
-    return fetch();
+  Future<void> delete(int hashCode, int id) async {
+    await FavoritesAPI().delete(hashCode, id);
+    fetch(hashCode);
   }
 }
 

@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:servet/components/drawer.dart';
 import 'package:servet/components/service_state_icon.dart';
 import 'package:servet/models/favorite_model.dart';
-import 'package:servet/services/service_api.dart';
+import 'package:servet/services/http/service_api.dart';
 import 'package:servet/view_models/favorites_vm.dart';
 import 'package:servet/view_models/services_vm.dart';
 import 'package:servet/view_models/settings_vm.dart';
@@ -17,16 +17,6 @@ class ServicesView extends StatefulWidget {
 }
 
 class _ServicesViewState extends State<ServicesView> {
-  @override
-  void initState() {
-    super.initState();
-
-    () async {
-      Provider.of<FavoritesVM>(context, listen: false).fetch();
-    }();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
