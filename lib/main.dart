@@ -4,9 +4,7 @@ import 'package:servet/hive/hive_init.dart';
 import 'package:servet/router.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
-void main() {
-  runApp(const Servet());
-}
+void main() => runApp(const Servet());
 
 class Servet extends StatelessWidget {
   const Servet({Key? key}) : super(key: key);
